@@ -21,6 +21,7 @@ export default class TableActionsController {
         // create search field element
         const searchField = document.createElement('input');
         searchField.type = 'text';
+        searchField.addEventListener('input', (e) => this.searchInColumn(e.target.value, index));
         actions.append(searchField);
         // create sort button element
         const sortButton = document.createElement('button');
@@ -47,5 +48,18 @@ export default class TableActionsController {
     }
     this.getTable().tBodies[0].append(...sortedRows);
     this.columnSortDesc = !this.columnSortDesc;
+  }
+
+  searchInColumn(subStr, columnIndex) {
+    const rows = Array.from(this.getTable().rows).slice(1);
+    const columnCells = rows.map((row) => row.cells[columnIndex]);
+    columnCells.forEach((cell) => {
+      const content = cell.textContent;
+      const reg = new RegExp(subStr, 'g');
+      const newContent = content
+        .replace(reg, `<span style="background-color:yellow;">${subStr}</span>`);
+      // eslint-disable-next-line no-param-reassign
+      cell.innerHTML = newContent;
+    });
   }
 }
