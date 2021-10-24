@@ -16,7 +16,7 @@ export default class TableActionsController {
 
   createColumnActions() {
     Array.from(this.getTable().rows[0].cells)
-      .forEach((cell) => {
+      .forEach((cell, index) => {
         const actions = document.createElement('div');
         // create search field element
         const searchField = document.createElement('input');
@@ -25,9 +25,27 @@ export default class TableActionsController {
         // create sort button element
         const sortButton = document.createElement('button');
         sortButton.innerText = 'Sort';
+        sortButton.addEventListener('click', () => this.sortOnColumn(index));
         actions.append(sortButton);
 
         cell.prepend(actions);
       });
+  }
+
+  sortOnColumn(columnIndex) {
+    if (this.sortedColumnIndex !== columnIndex) {
+      this.columnSortDesc = false;
+    }
+    this.sortedColumnIndex = columnIndex;
+    const sortedRows = Array.from(this.getTable().rows)
+      .slice(1)
+      .sort((a, b) => (
+        a.cells[columnIndex].innerHTML > b.cells[columnIndex].innerHTML ? 1 : -1
+      ));
+    if (this.columnSortDesc) {
+      sortedRows.reverse();
+    }
+    this.getTable().tBodies[0].append(...sortedRows);
+    this.columnSortDesc = !this.columnSortDesc;
   }
 }
