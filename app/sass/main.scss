@@ -5,6 +5,7 @@ $table-hover: #f2f2f2;
 $border-radius: 2px;
 $field-focus-color: white;
 $field-unfocus-color: rgba(255, 255, 255, 0.589);
+$marked-text: yellow;
 
 .table-container {
   padding: 20px;
@@ -42,6 +43,10 @@ $field-unfocus-color: rgba(255, 255, 255, 0.589);
     background-color: $table-accent;
     color: $table-primary;
     vertical-align: top;
+  }
+
+  td .marked {
+    background-color: $marked-text;
   }
 
   .actions {
@@ -129,7 +134,7 @@ $field-unfocus-color: rgba(255, 255, 255, 0.589);
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 670px) {
   .table-container {
     padding: 60px;
   }

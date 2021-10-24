@@ -61,7 +61,7 @@ export default class TableActionsController {
       const content = cell.textContent;
       const reg = new RegExp(subStr, 'g');
       const newContent = content
-        .replace(reg, `<span style="background-color:yellow;">${subStr}</span>`);
+        .replace(reg, `<span class="marked">${subStr}</span>`);
       // eslint-disable-next-line no-param-reassign
       cell.innerHTML = newContent;
     });
