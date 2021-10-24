@@ -1,3 +1,5 @@
+import tableToHtml from './js/tableToHtml';
+
 function loadTable() {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -16,7 +18,15 @@ function loadTable() {
   });
 }
 
+function renderTable(tableData) {
+  const htmlTable = tableToHtml(tableData, 'spaceX-history');
+  const tableContainer = document.createElement('div');
+  tableContainer.innerHTML = htmlTable;
+  document.body.append(tableContainer);
+}
+
 loadTable()
+  .then(renderTable)
   .catch((error) => {
     // eslint-disable-next-line no-console
     console.log(error.message);
