@@ -1,4 +1,5 @@
 import tableToHtml from './js/tableToHtml';
+import TableActionsController from './js/TableActionsController';
 
 function loadTable() {
   return new Promise((resolve, reject) => {
@@ -23,6 +24,7 @@ function renderTable(tableData) {
   const tableContainer = document.createElement('div');
   tableContainer.innerHTML = htmlTable;
   document.body.append(tableContainer);
+  TableActionsController.create('spaceX-history');
 }
 
 loadTable()
