@@ -22,6 +22,7 @@ function loadTable() {
 function renderTable(tableData) {
   const htmlTable = tableToHtml(tableData, 'spaceX-history');
   const tableContainer = document.createElement('div');
+  tableContainer.classList.add('table-container');
   tableContainer.innerHTML = htmlTable;
   document.body.append(tableContainer);
   TableActionsController.create('spaceX-history');

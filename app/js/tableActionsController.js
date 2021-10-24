@@ -18,13 +18,17 @@ export default class TableActionsController {
     Array.from(this.getTable().rows[0].cells)
       .forEach((cell, index) => {
         const actions = document.createElement('div');
+        actions.className = 'actions';
         // create search field element
         const searchField = document.createElement('input');
+        searchField.className = 'actions-search';
         searchField.type = 'text';
+        searchField.placeholder = 'Type for search';
         searchField.addEventListener('input', (e) => this.searchInColumn(e.target.value, index));
         actions.append(searchField);
         // create sort button element
-        const sortButton = document.createElement('button');
+        const sortButton = document.createElement('div');
+        sortButton.className = 'actions-sort';
         sortButton.innerText = 'Sort';
         sortButton.addEventListener('click', () => this.sortOnColumn(index));
         actions.append(sortButton);

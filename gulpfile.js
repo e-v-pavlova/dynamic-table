@@ -4,6 +4,8 @@ const rollup = require('rollup');
 const babel = require('gulp-babel');
 const minify = require('gulp-minify');
 const htmlmin = require('gulp-htmlmin');
+const sass = require('gulp-sass')(require('sass'));
+const cleanCSS = require('gulp-clean-css');
 
 gulp.task('server', () => {
   browserSync.init({
@@ -14,6 +16,10 @@ gulp.task('server', () => {
     done();
   }));
   gulp.watch('app/**/*.js', { ignored: 'app/dist/**/*.js' }, gulp.series('rollup-js', 'js', (done) => {
+    browserSync.reload();
+    done();
+  }));
+  gulp.watch('app/**/*.scss', gulp.series('sass', (done) => {
     browserSync.reload();
     done();
   }));
@@ -51,9 +57,16 @@ gulp.task('html', () => (
     .pipe(gulp.dest('app/dist'))
 ));
 
+gulp.task('sass', () => (
+  gulp.src('app/sass/*.scss')
+    .pipe(sass())
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(gulp.dest('app/dist/css'))
+));
+
 gulp.task('json', () => (
   gulp.src('app/demo.json')
     .pipe(gulp.dest('app/dist'))
 ));
 
-gulp.task('default', gulp.series('rollup-js', 'js', 'html', 'json', 'server'));
+gulp.task('default', gulp.series('rollup-js', 'js', 'html', 'sass', 'json', 'server'));

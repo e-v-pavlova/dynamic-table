@@ -1,0 +1,149 @@
+$table-primary: white;
+$table-secondary: #ddd;
+$table-accent: #04AA6D;
+$table-hover: #f2f2f2;
+$border-radius: 2px;
+$field-focus-color: white;
+$field-unfocus-color: rgba(255, 255, 255, 0.589);
+
+.table-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#spaceX-history {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1200px;
+
+  td, th {
+    border: 1px solid $table-secondary;
+    padding: 8px;
+  }
+
+  tr {
+    transition: background-color 0.1s ease;
+  }
+
+  tr:nth-child(even){
+    background-color: $table-hover;
+  }
+
+  tr:hover {
+    background-color: $table-secondary;
+  }
+
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: $table-accent;
+    color: $table-primary;
+    vertical-align: top;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    max-width: 100%;
+
+    &-sort {
+      margin-top: 5px;
+      padding: 5px 8px;
+      background-color: $table-secondary;
+      border-radius: $border-radius;
+      cursor: pointer;
+      transition: background-color 0.1s ease;
+      color: $table-accent;
+      font-weight: normal;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      height: 100%;
+    }
+
+    &-sort:hover {
+      background-color: $table-primary;
+    }
+
+    &-search {
+      max-width: 200px;
+      width: 80%;
+      min-width: 50px;
+      margin-right: 5px;
+      border: 2px solid $field-unfocus-color;
+      font-size: 16px;
+      padding: 10px 20px;
+      color: $field-unfocus-color;
+      border-radius: $border-radius;
+      background: transparent;
+      transition: all .100s;
+
+      &:focus{
+        outline:none;
+        color: $field-focus-color;
+        border-color: $field-focus-color;
+      }
+
+      &.keyup {
+        color:$field-focus-color;
+        border-color:$field-focus-color;
+        text-shadow:0 0 .125em $field-focus-color;
+        box-shadow:0 0 .25em $field-focus-color, inset 0 0 .25em $field-focus-color;
+      }
+    }
+
+    ::-webkit-input-placeholder {
+      color: $field-unfocus-color;
+      text-shadow: 0 0 .125em transparent;
+      transition: all .25s;
+    }
+    input:focus::-webkit-input-placeholder {
+      opacity: 0.5;
+    }
+
+    ::-moz-placeholder {
+      color: $field-unfocus-color;
+      text-shadow: 0 0 .125em transparent;
+      transition: all .25s;
+    }
+    input:focus::-moz-placeholder {
+      opacity:.5;
+    }
+
+    :-ms-input-placeholder {
+      color: $field-unfocus-color;
+      text-shadow: 0 0 .125em transparent;
+      transition: all .25s;
+    }
+    input:focus:-ms-input-placeholder {
+      opacity:.5;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .table-container {
+    padding: 60px;
+  }
+
+  #spaceX-history .actions {
+    flex-wrap: nowrap;
+
+    &-sort {
+      margin-top: 0;
+      height: auto;
+    }
+
+    &-search {
+      width: auto;
+    }
+  }
+}
