@@ -2,6 +2,10 @@
   "name": "dynamic-table",
   "version": "1.0.0",
   "description": "dynamically loaded data with sorting and searching by columns",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/e-v-pavlova/dynamic-table.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
